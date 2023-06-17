@@ -1,12 +1,11 @@
 ﻿#include <iostream>
-#include <vector>
 
 enum operation
 {
     ex, 
     circle, 
+    triangle,
     square, 
-    triangle, 
     rectangle
 };
 
@@ -168,11 +167,9 @@ int main()
 {
     
     int tempX, tempY, tempC;
-    double tempEdge , tempHeight;
+    double tempEdge, tempHeight = 0.0;
     int input;
-    std::cout << "Choose the shape: ";
-    std::cin >> input;
-
+    
     while (true)
     {
         std::cout << "Choose the shape: ";
@@ -186,27 +183,70 @@ int main()
             switch (input)
             {
             case operation::circle:
+            {
                 std::cout << "Enter shap's coordinates: ";
                 std::cin >> tempX >> tempY;
                 std::cout << "Enter shap's color: ";
                 std::cin >> tempC;
                 std::cout << "Enter shap's radius: ";
                 std::cin >> tempEdge;
-                Circle* circle = new Circle (tempX, tempY, tempC, tempEdge);
-                std::cout << "This Circle is" << circle->getColor();
-                std::cout << "This Circle's area is " << circle->areaC();
-                std::cout << "This Circle discribe is " << circle->describeC();
+                Circle* circle = new Circle(tempX, tempY, tempC, tempEdge);
+                std::cout << "This Circle is " << circle->getColor() << std::endl;;
+                std::cout << "This Circle's area is " << circle->areaC() << std::endl;;
+                std::cout << "This Circle discribe is " << circle->describeC() << std::endl;;
                 delete circle;
                 //circle = nullptr;
-                break;
-            case operation::square:
-                
+            }
                 break;
             case operation::triangle:
-                
+            {
+                std::cout << "Enter shap's coordinates: ";
+                std::cin >> tempX >> tempY;
+                std::cout << "Enter shap's color: ";
+                std::cin >> tempC;
+                std::cout << "Enter shap's edge: ";
+                std::cin >> tempEdge;
+                Triangle* triangle = new Triangle(tempX, tempY, tempC, tempEdge);
+                std::cout << "This Triangle is " << triangle->getColor() << std::endl;;
+                std::cout << "This Triangle's area is " << triangle->areaT() << std::endl;;
+                std::cout << "This Triangle discribe is " << triangle->describeTandS() << std::endl;;
+                delete triangle;
+                //triangle = nullptr;
+            }
+                break;
+            case operation::square:
+            {
+                std::cout << "Enter shap's coordinates: ";
+                std::cin >> tempX >> tempY;
+                std::cout << "Enter shap's color: ";
+                std::cin >> tempC;
+                std::cout << "Enter shap's edge: ";
+                std::cin >> tempEdge;
+                Square* square = new Square(tempX, tempY, tempC, tempEdge);
+                std::cout << "This Square is " << square->getColor() << std::endl;;
+                std::cout << "This Square's area is " << square->areaS() << std::endl;;
+                std::cout << "This Square discribe is " << square->describeTandS() << std::endl;;
+                delete square;
+                //square = nullptr;
+            }
                 break;
             case operation::rectangle:
-
+            {
+                std::cout << "Enter shap's coordinates: ";
+                std::cin >> tempX >> tempY;
+                std::cout << "Enter shap's color: ";
+                std::cin >> tempC;
+                std::cout << "Enter shap's widht: ";
+                std::cin >> tempEdge;
+                std::cout << "Enter shap's height: ";
+                std::cin >> tempHeight;
+                Rectangle* rectangle = new Rectangle(tempX, tempY, tempC, tempEdge, tempHeight);
+                std::cout << "This Rectangle is " << rectangle->getColor() << std::endl;;
+                std::cout << "This Rectangle's area is " << rectangle->areaS() << std::endl;;
+                std::cout << "This Rectangle discribe is " << rectangle->describeTandS() << std::endl;;
+                delete rectangle;
+                //rectangle = nullptr;
+            }
                 break;
             case operation::ex:
 
