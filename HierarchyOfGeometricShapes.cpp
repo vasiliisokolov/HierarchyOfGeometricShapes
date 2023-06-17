@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <vector>
 
 enum operation
 {
@@ -23,6 +24,59 @@ public:
     int cX;
     int cY;
     color c;
+
+    void setColor(int input)
+    {
+        if (input > 3 || input < 0)
+        {
+            c = none;
+        }
+        else
+        {
+            switch (input)
+            {
+            case 0:
+                c = none;
+                break;
+            case 1:
+                c = red;
+                break;
+            case 2:
+                c = blue;
+                break;
+            case 3:
+                c = green;
+                break;
+            }
+        }
+        
+    }
+
+    std::string getColor()
+    {
+        switch (c)
+        {
+        case 0:
+            return "none";
+            break;
+        case 1:
+            return "red";
+            break;
+        case 2:
+            return "blue";
+            break;
+        case 3:
+            return "green";
+            break;
+        }
+    }
+
+    Figure (int inX, int inY, int inC)
+    {
+        cX = inX;
+        cY = inY;
+        setColor(inC);
+    }
 };
 
 class Circle : public Figure
@@ -32,21 +86,19 @@ public:
 
     double radius;
 
-    double area()
+    double areaC()
     {
         return atan(1) * 4 * radius;
     }
 
-    double describe()
+    double describeC()
     {
         return radius * radius;
     }
 
-    Circle(int inX, int inY, color inC, double inRadius): radius(inRadius)
+    Circle(int inX, int inY, int inC, double inRadius): Figure(inX, inY, inC)
     {
-        cX = inX;
-        cY = inY;
-        c = inC;
+        radius = inRadius;
     }
 };
 
@@ -56,75 +108,67 @@ public:
 
     double edge;
 
-    double area()
+    double areaT()
     {
         return edge * edge * std::sqrt(3) / 4;
     }
     
-    double describe()
+    double describeTandS()
     {
         return edge * edge;
     }
 
-    Triangle (int inX, int inY, color inC, double inEdge) : edge(inEdge)
+    Triangle (int inX, int inY, int inC, double inEdge) : Figure(inX, inY, inC)
     {
-        cX = inX;
-        cY = inY;
-        c = inC;
+        edge = inEdge;
     }
+    
 };
 
-class Square : public Figure
+class Square : public Triangle
 {
 public:
 
-    double edge;
-
-    double area()
+    double areaS()
     {
         return edge * edge;
     }
 
-    double describe()
+    Square (int inX, int inY, int inC, double inEdge) : Triangle (inX, inY, inC, inEdge)
     {
-        return edge * edge;
-    }
-
-    Square (int inX, int inY, color inC, double inEdge) : edge(inEdge)
-    {
-        cX = inX;
-        cY = inY;
-        c = inC;
+        
     }
 };
 
-class Rectangle : public Figure
+class Rectangle : public Square
 {
 public:
 
-    double width, height;
+    double height;
 
-    double area()
+    double areaR()
     {
-        return width * height;
+        return edge * height;
     }
 
-    double describe()
+    double describeR()
     {
-        return width * height;
+        return edge * height;
     }
 
-    Rectangle (int inX, int inY, color inC, double inWidth, double inHeight) : width(inWidth), height(inHeight)
+    Rectangle (int inX, int inY, int inC, double inWidth, double inHeight) : Square(inX, inY, inC, inWidth)
     {
-        cX = inX;
-        cY = inY;
-        c = inC;
+        height = inHeight;
+        
     }
 
 };
 
 int main()
 {
+    
+    int tempX, tempY, tempC;
+    double tempEdge , tempHeight;
     int input;
     std::cout << "Choose the shape: ";
     std::cin >> input;
@@ -142,6 +186,18 @@ int main()
             switch (input)
             {
             case operation::circle:
+                std::cout << "Enter shap's coordinates: ";
+                std::cin >> tempX >> tempY;
+                std::cout << "Enter shap's color: ";
+                std::cin >> tempC;
+                std::cout << "Enter shap's radius: ";
+                std::cin >> tempEdge;
+                Circle* circle = new Circle (tempX, tempY, tempC, tempEdge);
+                std::cout << "This Circle is" << circle->getColor();
+                std::cout << "This Circle's area is " << circle->areaC();
+                std::cout << "This Circle discribe is " << circle->describeC();
+                delete circle;
+                //circle = nullptr;
                 break;
             case operation::square:
                 
